@@ -1,0 +1,61 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>xyz</title>
+        <link rel="stylesheet" href="style.css" />
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=New+Tegomin&display=swap" rel="stylesheet">
+    </head>
+
+    <div>
+        <label for="name">Enter code:</label>
+        <br/>
+        <input type="text" id="code" name="code" required size="10" autofocus>
+        <p id="values"></p>
+    </div>
+
+    <script>
+     const requestURL = 'task_001.json'
+
+     let tasks;
+
+     function readTasks() {
+         let request = new XMLHttpRequest()
+         request.open('GET', requestURL)
+         request.responseType = 'json';
+         request.send();
+         request.onload = function() {
+             tasks = request.response;
+         }
+     }
+
+     function fadeout() {
+         const el = document.getElementById('values');
+         console.log(el);
+         el.style.opacity = '0';
+     }
+
+     const input = document.querySelector('input');
+     const log = document.getElementById('values');
+
+     readTasks()
+
+     document.querySelector('input').addEventListener('keypress', updateValue);
+     function updateValue(e) {
+         if (e.key === 'Enter') {
+             log.style.opacity = '1';
+             log.textContent = ""
+             let code = input.value.toLowerCase().trim();
+
+             input.value = '';
+             console.log("Enter", code)
+             if (tasks[code]) {
+                 let hint = tasks[code]
+                 log.textContent = hint
+                 window.setTimeout(fadeout, 4000);
+             }
+         }
+     }
+    </script>
+</html>

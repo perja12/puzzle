@@ -1,0 +1,21 @@
+body {
+    background-color: #101010;
+    color: white;
+    font-family: 'New Tegomin', serif;
+    font-size: x-large;
+    text-align: center;
+}
+
+input {
+    background-color: inherit;
+    color: inherit;
+    font-family: inherit;
+    font-size: 100%;
+    border: none;
+    text-align: center;
+}
+
+#values {
+    opacity: 1;
+    transition: opacity 2s;
+}
